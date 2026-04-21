@@ -1,72 +1,53 @@
 # Resolvd — Frontend
 
-React Native / Expo app for Resolvd. Connects to a hosted backend API — you do not need to run anything server-side locally.
+React Native / Expo app. The backend API is already deployed — nothing to run server-side.
 
 ## Setup
-
-### 1. Prerequisites
-
-- **Node.js** 20 or newer
-- **Expo Go** installed on your phone (App Store / Play Store)
-- Your phone and computer on the same Wi-Fi network
-
-### 2. Install and configure
 
 ```bash
 npm install
 cp .env.example .env
-```
-
-The `.env` file points the app at the hosted backend. Don't change the URL.
-
-### 3. Run
-
-```bash
 npm start
 ```
 
-A QR code appears in the terminal. Open **Expo Go** on your phone and scan it. The app loads on your device.
+A QR code appears. Open **Expo Go** on your phone, scan it, the app loads on your device.
 
-### 4. Log in
+Phone and computer must be on the same Wi-Fi network. If that doesn't work, run `npm start -- --tunnel` instead.
 
-Use the test account credentials you've been given (ask Marius if you don't have them yet).
+Login with the credentials sent to you separately.
 
-## Project layout
+## Layout
 
 ```
-app/            # Screens (expo-router file-based routing)
-  (auth)/       # Login screens
-  (app)/        # Main app screens — after login
-  _layout.tsx   # Root layout
-  index.tsx     # Entry redirect
-
-components/     # Reusable UI components
-theme/          # Colors, spacing, typography tokens
-  tokens.ts
-  typography.ts
-  icons.ts
-
-assets/         # Icon, splash
-lib/            # API client, auth, React Query setup — DO NOT EDIT (see CONTRIBUTING.md)
+app/          # Screens (expo-router)
+  (auth)/     # Login screens
+  (app)/      # Main app screens
+components/   # Reusable UI
+theme/        # Colors, spacing, typography
+assets/       # Icons, splash
+lib/          # API client, auth, data layer — don't touch
 ```
 
 ## Scripts
 
-- `npm start` — run the dev server, scan with Expo Go
-- `npm run typecheck` — check types with TypeScript
-- `npm run ios` — build a dev client for iOS Simulator (requires Xcode, macOS only — not needed for normal work)
+- `npm start` — dev server
+- `npm run typecheck` — TypeScript check
+- `npm run ios` — iOS Simulator build (macOS + Xcode required)
+
+## Workflow
+
+Work on a branch, push, open a PR on GitHub — or push to `main` directly if you prefer.
+
+```bash
+git checkout -b theme/whatever
+# make changes
+git add -A
+git commit -m "describe the change"
+git push
+```
 
 ## Troubleshooting
 
-**QR code won't scan / app won't load**
-Make sure your phone and computer are on the same Wi-Fi network. If still stuck, in the terminal press `s` to switch to Expo Go mode, or run `npm start -- --tunnel` to use a tunnel connection.
+**"EXPO_PUBLIC_API_URL is not set"** → you haven't created `.env`. Run `cp .env.example .env` and restart.
 
-**"EXPO_PUBLIC_API_URL is not set"**
-You haven't created `.env`. Run `cp .env.example .env` and restart `npm start`.
-
-**Login fails**
-Check that the API URL in `.env` still matches `.env.example`. If credentials are wrong, ask Marius for the current test account.
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for what's in-scope for this repo and how to propose changes.
+**Login fails** → check with Joakim that the test account is still valid.
