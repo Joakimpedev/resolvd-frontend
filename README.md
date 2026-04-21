@@ -1,53 +1,69 @@
 # Resolvd — Frontend
 
-React Native / Expo app. The backend API is already deployed — nothing to run server-side.
+React Native / Expo app. Backend is already deployed.
 
-## Setup
+---
+
+## First-time setup
 
 ```bash
+git clone https://github.com/Joakimpedev/resolvd-frontend.git
+cd resolvd-frontend
 npm install
 cp .env.example .env
 npm start
 ```
 
-A QR code appears. Open **Expo Go** on your phone, scan it, the app loads on your device.
+A QR code appears in the terminal. Open **Expo Go** on your phone and scan it. Log in with the credentials sent to you separately.
 
-Phone and computer must be on the same Wi-Fi network. If that doesn't work, run `npm start -- --tunnel` instead.
+Phone and computer must be on the same Wi-Fi. If that fails, run `npm start -- --tunnel` instead.
 
-Login with the credentials sent to you separately.
+---
+
+## Making changes
+
+```bash
+git pull                              # get latest
+# edit files
+git add -A
+git commit -m "describe what changed"
+git push
+```
+
+That's it — pushes directly to `main`.
+
+---
 
 ## Layout
 
 ```
-app/          # Screens (expo-router)
-  (auth)/     # Login screens
-  (app)/      # Main app screens
-components/   # Reusable UI
-theme/        # Colors, spacing, typography
-assets/       # Icons, splash
-lib/          # API client, auth, data layer — don't touch
+app/          Screens (expo-router)
+  (auth)/     Login
+  (app)/      Main app tabs
+components/   Reusable UI
+theme/        Colors, spacing, typography
+assets/       Icons, splash
+lib/          API client, auth — don't touch
 ```
+
+**Touch:** `theme/`, `components/`, `app/`, `assets/`
+**Don't touch:** `lib/`, `package.json`, `app.json`, `metro.config.js`, `tsconfig.json`
+
+If you want to add something that needs data (e.g. a new list of things from the backend), ping Joakim first.
+
+---
 
 ## Scripts
 
 - `npm start` — dev server
 - `npm run typecheck` — TypeScript check
-- `npm run ios` — iOS Simulator build (macOS + Xcode required)
 
-## Workflow
-
-Work on a branch, push, open a PR on GitHub — or push to `main` directly if you prefer.
-
-```bash
-git checkout -b theme/whatever
-# make changes
-git add -A
-git commit -m "describe the change"
-git push
-```
+---
 
 ## Troubleshooting
 
-**"EXPO_PUBLIC_API_URL is not set"** → you haven't created `.env`. Run `cp .env.example .env` and restart.
+**`EXPO_PUBLIC_API_URL is not set`** → run `cp .env.example .env` and restart.
 
-**Login fails** → check with Joakim that the test account is still valid.
+**Can't scan QR / app won't load** → same Wi-Fi; otherwise `npm start -- --tunnel`.
+
+**Login fails** → ping Joakim for a fresh test account.
